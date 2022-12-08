@@ -12,3 +12,23 @@
  *
  *= require_self
  */
+
+ .button {
+  width: 10em;
+  height: 5ex;
+  padding: 5px 5px;
+  background-color: DodgerBlue;
+  border: 2px grey;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: DarkCyan;
+}
+
+.button:active {
+  box-shadow: 2px 2px 5px #0e3a2b;
+}
