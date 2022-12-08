@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   # Routes for the Event resource:
 
   # CREATE
-  get("/add_event"), , { :controller => "events", :action => "add" })
+  get("/add_event", { :controller => "events", :action => "add" })
+  
   post("/insert_event", { :controller => "events", :action => "create" })
           
   # READ
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
   # Routes for the User account:
 
   # SIGN UP FORM
-  get("/", { :controller => "user_authentication", :action => "sign_up_form" }) 
+  get("/", { :controller => "user_authentication", :action => "sign_in_form"}) 
 
   get("/user_sign_up", { :controller => "user_authentication", :action => "sign_up_form" })        
   # CREATE RECORD

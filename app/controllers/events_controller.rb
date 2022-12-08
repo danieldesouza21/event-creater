@@ -16,6 +16,10 @@ class EventsController < ApplicationController
 
     render({ :template => "events/show.html.erb" })
   end
+def add
+
+  render({ :template => "events/add_event.html.erb" })
+end
 
   def create
     the_event = Event.new

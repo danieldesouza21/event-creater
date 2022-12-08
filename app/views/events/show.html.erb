@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Event #<%= @the_event.id %> details
+      <%= User.where({:id => @the_event.owner_id}).at(0).first_name%>'s Event: <%= @the_event.title %> details
     </h1>
 
     <div>
