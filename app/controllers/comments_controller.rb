@@ -18,16 +18,21 @@ class CommentsController < ApplicationController
   end
 
   def create
+
+    the_id = params.fetch("path_id")
+    matching_events = Event.where({ :id => the_id })
+    the_event = matching_events.at(0)
+
     the_comment = Comment.new
     the_comment.body = params.fetch("query_body")
-    the_comment.commenter_id = params.fetch("query_commenter_id")
-    the_comment.photo_id = params.fetch("query_photo_id")
+    the_comment.commenter_id = @current_user.id
+    the_comment.photo_id = the_event.id
 
     if the_comment.valid?
       the_comment.save
-      redirect_to("/comments", { :notice => "Comment created successfully." })
+      redirect_to("/events/#{the_event.id}", { :notice => "Comment created successfully." })
     else
-      redirect_to("/comments", { :alert => the_comment.errors.full_messages.to_sentence })
+      redirect_to("/comments/#{the_event.id}", { :alert => the_comment.errors.full_messages.to_sentence })
     end
   end
 

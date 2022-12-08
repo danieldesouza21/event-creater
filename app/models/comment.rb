@@ -10,4 +10,13 @@
 #  photo_id     :integer
 #
 class Comment < ApplicationRecord
+
+  def commenter
+    my_id = self.id
+
+    matching_comments = Comment.where({ :commenter_id => my_id })
+
+    return matching_comments
+  end
+
 end

@@ -14,4 +14,10 @@
 #  owner_id    :integer
 #
 class Event < ApplicationRecord
+
+  def comments
+    my_id = self.id
+    matching_comments = Comment.where({ :photo_id => self.id})
+    return matching_comments
+  end
 end

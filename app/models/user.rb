@@ -15,8 +15,10 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
 
+def my_event
   has_many(:events, {
     :foreign_key => "owner_id"
   })
+end
   
 end
