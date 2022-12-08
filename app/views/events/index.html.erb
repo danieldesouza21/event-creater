@@ -1,107 +1,35 @@
-<div>
-  <div>
-    <h1>
-      Events in Hyde Park
-    </h1>
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Events in Hyde Park </h1>
+        <p class="lead text-muted"> See what your fellow classmates are doing! </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <% @list_of_events.each do |an_event| %>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="100%" xmlns="" role="img" aria-label="Placeholder: صورة مصغرة" preserveAspectRatio="xMidYMid slice" focusable="false"> <img width="100%" height="100%" src="<%= an_event.image %>"></svg>
+
+              <div class="card-body">
+                <p class="card-text"><%= an_event.title %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <form action="/events/<%= an_event.id %>" method="get" >
+                      <button type="submit" onclick="/events/<%= an_event.id %>" class="btn btn-sm btn-outline-secondary">More details</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
-
-<hr>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-
-        <th>
-          Date
-        </th>
-
-        <th>
-          Title
-        </th>
-
-
-        <th>
-          Location
-        </th>
-
-        <th>
-          Time
-        </th>
-
-        <th>
-          Owner
-        </th>
-
-        <th>
-          Description
-        </th>
-
-        <th>
-          Image
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_events.each do |an_event| %>
-      <tr>
-
-        <td>
-          <%= an_event.date_time %>
-        </td>
-
-        <td>
-          <%= an_event.title %>
-        </td>
-
-        <td>
-          <%= an_event.location %>
-        </td>
-
-        <td>
-          <%= an_event.duration %>
-        </td>
-
-        <td>
-          <%= User.where({:id => an_event.owner_id}).at(0).first_name %>
-        </td>
-
-        <td>
-          <%= an_event.description %>
-        </td>
-
-        <td>
-          <img src="<%= an_event.image %>">
-        </td>
-
-        <td>
-          <%= time_ago_in_words(an_event.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(an_event.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/events/<%= an_event.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-
-<hr>
