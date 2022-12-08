@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all events
+      Events in Hyde Park
     </h1>
   </div>
 </div>
@@ -25,7 +25,7 @@
 
       <div>
         <label for="date_time_box">
-          Date time
+          Date
         </label>
 
         <input type="date" id="date_time_box" name="query_date_time">
@@ -41,19 +41,12 @@
 
       <div>
         <label for="duration_box">
-          Duration
+          Time
         </label>
 
         <input type="text" id="duration_box" name="query_duration">
       </div>
 
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id">
-      </div>
 
       <div>
         <label for="description_box">
@@ -83,24 +76,22 @@
   <div>
     <table border="1">
       <tr>
+
         <th>
-          ID
+          Date
         </th>
 
         <th>
           Title
         </th>
 
-        <th>
-          Date time
-        </th>
 
         <th>
           Location
         </th>
 
         <th>
-          Duration
+          Time
         </th>
 
         <th>
@@ -129,16 +120,13 @@
 
       <% @list_of_events.each do |an_event| %>
       <tr>
+
         <td>
-          <%= an_event.id %>
+          <%= an_event.date_time %>
         </td>
 
         <td>
           <%= an_event.title %>
-        </td>
-
-        <td>
-          <%= an_event.date_time %>
         </td>
 
         <td>
@@ -150,7 +138,7 @@
         </td>
 
         <td>
-          <%= an_event.owner_id %>
+          <%= User.where({:id => an_event.owner_id}).at(0).first_name %>
         </td>
 
         <td>

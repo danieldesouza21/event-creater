@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     the_event.date_time = params.fetch("query_date_time")
     the_event.location = params.fetch("query_location")
     the_event.duration = params.fetch("query_duration")
-    the_event.owner_id = params.fetch("query_owner_id")
+    the_event.owner_id = session.fetch(:user_id)
     the_event.description = params.fetch("query_description")
     the_event.image = params.fetch("query_image")
 
