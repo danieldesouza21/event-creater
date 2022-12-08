@@ -65,7 +65,7 @@
         Image
       </dt>
       <dd>
-        <%= @the_event.image %>
+        <img src="<%= @the_event.image %>">
       </dd>
 
       <dt>
@@ -88,6 +88,7 @@
 <hr>
 
 
+<% if User.where({:id => @the_event.owner_id}).at(0) == @current_user %>
 <div>
   <div>
     <h2>
@@ -150,6 +151,8 @@
     </form>
   </div>
 </div>
+<% else %>
+<% end%>
 
 <hr>
 
