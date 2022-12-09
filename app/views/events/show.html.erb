@@ -1,25 +1,27 @@
 
 
-<div>
+<div class = "padding">
   <div>
     <h1>
       <%= User.where({:id => @the_event.owner_id}).at(0).first_name%>'s Event: <%= @the_event.title %> details
     </h1>
 
     <div>
-      <div>
-        <a href="/events">
-          Go back
-        </a>
-      </div>
 
-<% if User.where({:id => @the_event.owner_id}).at(0) == @current_user %>
+        <form action ="/events">
+          <button class="button"> Go back </button>
+        </form>
+      </div>
+      <p></p>
+
+
+  <% if User.where({:id => @the_event.owner_id}).at(0) == @current_user %>
       <div>
         <a href="/delete_event/<%= @the_event.id %>" class="btn btn-danger">
           Delete event
         </a>
       </div>
-    </div>
+    <p></p>
     <%else%>
     <%end%>
 
@@ -94,61 +96,61 @@
 
 
 <% if User.where({:id => @the_event.owner_id}).at(0) == @current_user %>
-<div>
+<div class= "padding">
   <div>
     <h2>
       Edit event
     </h2>
 
     <form action="/modify_event/<%= @the_event.id %>"  method="post" >
-      <div>
+      <p>
         <label for="title_box">
           Title
         </label>
 
         <input type="text" id="title_box" name="query_title" value="<%= @the_event.title %>">
-      </div>
+      </p>
 
-      <div>
+      <p>
         <label for="date_time_box">
           Date time
         </label>
 
         <input type="date" id="date_time_box" name="query_date_time" value="<%= @the_event.date_time %>">
-      </div>
+      </p>
 
-      <div>
+      <p>
         <label for="location_box">
           Location
         </label>
 
         <input type="text" id="location_box" name="query_location" value="<%= @the_event.location %>">
-      </div>
+      </p>
 
-      <div>
+      <p>
         <label for="duration_box">
           Duration
         </label>
 
         <input type="text" id="duration_box" name="query_duration" value="<%= @the_event.duration %>">
-      </div>
+      </p>
 
 
-      <div>
+      <p>
         <label for="description_box">
           Description
         </label>
 
         <textarea id="description_box" name="query_description"><%= @the_event.description %></textarea>
-      </div>
+      </p>
 
-      <div>
+      <p>
         <label for="image_box">
           Image
         </label>
 
         <input type="text" id="image_box" name="query_image" value="<%= @the_event.image %>">
-      </div>
+      </p>
 
       <button class="button">
         Update event
@@ -158,52 +160,39 @@
 </div>
 <% else %>
 <% end%>
+ <hr>
 
-<hr>
+<div class="row d-flex justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+      <div class="card-body p-4">
+        <div class="form-outline mb-4">
+          <form action="/insert_comment/<%= @the_event.id %>" method="post">
+            <label for="body_box">
+              Comments
+            </label>
+            <textarea id="body_box" name="query_body" name="query_body" class="form-control" placeholder="Type comment..."></textarea>
+            <p> </p>
+          <button class="button"> + Add a note</button>
+          </form>
+        </div>
+        <% @the_event.comments.each do |a_comment| %>
+          <div class="card mb-4">
+            <div class="card-body">
+              <p><%= a_comment.body %></p>
 
-<h2>Comments</h2>
-
-<table>
-  <tr>
-    <th>User</th>
-    <th>Comment</th>
-    <th>Posted</th>
-  </tr>
-
-<% @the_event.comments.each do |a_comment| %>
-  <tr>
-    <td>
-      <%= User.where({:id => a_comment.commenter_id}).at(0).first_name %>
-    </td>
-
-    <td>
-      <%= a_comment.body %>
-    </td>
-
-    <td>
-      <%= a_comment.created_at %>
-    </td>
-  </tr>
-  <% end %>
-
-  <div>
-  <div>
-    <h2>
-      Add a new comment
-    </h2>
-
-    <form action="/insert_comment/<%= @the_event.id %>" method="post">
-      <div>
-        <label for="body_box">
-          Body
-        </label>
-
-        <textarea id="body_box" name="query_body" rows="3"></textarea>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex flex-row align-items-center">
+                  <p class="small mb-0 ms-2"><%= User.where({:id => a_comment.commenter_id}).at(0).first_name %></p>
+                </div>
+                <div class="d-flex flex-row align-items-center">
+                  <p class="small text-muted mb-0">      <%= a_comment.created_at %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
       </div>
-
-      <button class="button">
-        Create comment
-      </button>
-    </form>
+    </div>
   </div>
 </div>
